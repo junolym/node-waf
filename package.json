@@ -1,0 +1,27 @@
+{
+  "name": "waf",
+  "version": "1.0.0",
+  "description": "Web Application Firewall",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/junolym/node-waf.git"
+  },
+  "author": "junxianchen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/junolym/node-waf/issues"
+  },
+  "homepage": "https://github.com/junolym/node-waf#readme",
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-request": "^1.0.0"
+  }
+}
