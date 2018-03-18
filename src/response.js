@@ -96,7 +96,7 @@ class Request {
             powL: this.config.pow.page.l,
             powM: this.config.pow.page.m,
             powN: this.config.pow.page.n,
-            question: utils.signafiture(url, ts, this.config.privkey),
+            question: utils.signature(url, ts, this.config.privkey),
             timestamp: ts,
         });
         return html;

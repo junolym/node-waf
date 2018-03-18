@@ -23,6 +23,7 @@
   "dependencies": {
     "js-yaml": "^3.11.0",
     "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
     "koa-request": "^1.0.0"
   }
 }

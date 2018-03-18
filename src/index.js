@@ -64,9 +64,9 @@ class waf {
                 case 0:
                     return this.response.redirect(meta.challengeResult.data);
                 case 1:
-                    return this.response.sendJson(meta.challengeResult.data);
-                case 2:
                     return this.response.sendHtml(this.html.challengeFailed);
+                case 2:
+                    return this.response.sendJson(meta.challengeResult.data);
             }
         }
 

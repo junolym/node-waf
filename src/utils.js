@@ -22,9 +22,13 @@ const utils = {
         return html;
     },
 
-    signafiture(url, ts, privkey) {
+    signature(url, ts, privkey) {
         const md5 = crypto.createHash('md5');
         return md5.update(url + ts + privkey).digest('hex');
+    },
+
+    sha256(str) {
+        return crypto.createHash('sha256').update(str).digest('hex');
     },
 
     log(method, url, headers, result) {

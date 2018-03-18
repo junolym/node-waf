@@ -5,6 +5,7 @@
 
 const koa = require('koa');
 const request = require('koa-request');
+const bodyParser = require('koa-bodyparser');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const waf = require('./src/index.js');
@@ -14,6 +15,8 @@ const config = yaml.safeLoad(fs.readFileSync(`${__dirname}/server.yml`, 'utf-8')
 const app = new koa();
 const firewall = new waf(config.waf);
 
+app.use(bodyParser());
+
 /**
  * waf中间件：修改请求和响应
  * 调用waf的process方法，在请求前processRequest，请求后
@@ -22,6 +25,7 @@ const firewall = new waf(config.waf);
  */
 app.use(async (ctx, next) => {
     const meta = {};
+
     if (firewall.processRequest(
             ctx.request.method,
             ctx.request.url,
