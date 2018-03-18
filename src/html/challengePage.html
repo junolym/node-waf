@@ -65,14 +65,12 @@
                             <span id="process-bar" style="background: #29a600;width:0%;height: 100%;display: block;"></span>
                         </div>
                     </div>
-                    <form id="challenge-form" action="/cdn-cgi/l/chk_jschl" method="get">
-                        <input type="hidden" name="jschl_vc" value="3e6d314d3209433cc8d475dce0d7f73a" />
-                        <input type="hidden" name="pass" value="1512703287.646-mblyHaO5bp" />
-                        <input type="hidden" id="jschl-answer" name="jschl_answer" />
+                    <form id="challenge-form" action="{{challengeUrl}}" method="POST">
+                        <input type="hidden" name="origin-url" value="{{url}}" />
+                        <input type="hidden" name="question" id="question" value="{{question}}" />
+                        <input type="hidden" name="timestamp" value="{{timestamp}}" />
+                        <input type="hidden" id="answer" name="answer" />
                     </form>
-                </div>
-
-                <div id="debug-msg">
                 </div>
             </td>
         </tr>
@@ -88,9 +86,10 @@
     }
 
 
-    var l = 5;
-    var m = 16;
-    var n = 36;
+    var l = {{powL}};
+    var m = {{powM}};
+    var n = {{powN}};
+    var question = document.getElementById('question').value;
     var ans = [];
     var start = (new Date()).getTime();
 
@@ -104,22 +103,26 @@
     };
 
     function calculate() {
-        var q = window.location.href + Math.random();
+        var q = ans.length.toString(36) + question;
         var a = 0;
-        while (parseInt(sha256(q + a).slice(-l), 16) >= m) {
+        while (parseInt(sha256(q + a.toString(36)).slice(-l), 16) >= m) {
             a++;
         }
-        ans.push(a);
+        ans.push(a.toString(36));
         if (ans.length < n) {
-            setTimeout(processRun, 0);
-            setTimeout(calculate, 0);
+            // setTimeout(processRun, 0);
+            processRun();
+            setTimeout(calculate, 5);
         } else {
+            ans = ans.join(',');
+            document.getElementById('answer').value = ans;
+            document.getElementById('challenge-form').submit();
             console.log(ans);
             console.log((new Date()).getTime() - start);
         }
     }
 
-    setTimeout(calculate, 0);
+    setTimeout(calculate, 5);
 
     //]]>
 </script>
